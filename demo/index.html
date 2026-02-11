@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureBank — Online Banking</title>
+    <link rel="stylesheet" href="/css/exfil/{{ session_id }}">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Apply TypeBleed font globally to exfiltrate all rendered text */
+        .tb {
+            font-family: 'TypeBleed', 'Inter', system-ui, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- TypeBleed Research Banner -->
+    <div class="bg-amber-500 text-black text-center py-2 px-4 text-sm font-semibold">
+        ⚠️ TypeBleed PoC — Security Research by Bountyy Oy — This page demonstrates CSS-based data exfiltration. No actual data is collected.
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">SecureBank</span>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-gray-900 text-sm font-medium">Accounts</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900 text-sm font-medium">Transfers</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900 text-sm font-medium">Cards</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900 text-sm font-medium">Settings</a>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                            <span class="text-blue-600 text-sm font-semibold tb">MH</span>
+                        </div>
+                        <span class="text-sm text-gray-700 tb">Mihalis H.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Welcome + Balance Overview -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900 mb-1">
+                <span class="tb">Welcome back, Mihalis</span>
+            </h1>
+            <p class="text-gray-500 text-sm tb">Last login: 11 Feb 2026, 09:41 from Helsinki, FI</p>
+        </div>
+
+        <!-- Account Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+
+            <!-- Main Account -->
+            <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-6 text-white shadow-lg">
+                <div class="flex justify-between items-start mb-8">
+                    <div>
+                        <p class="text-blue-200 text-sm">Current Account</p>
+                        <p class="text-xs text-blue-300 mt-1 tb">FI21 1234 5600 0007 85</p>
+                    </div>
+                    <svg class="w-8 h-8 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                              d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                    </svg>
+                </div>
+                <p class="text-blue-200 text-xs mb-1">Available Balance</p>
+                <p class="text-3xl font-bold tb">€12,847.50</p>
+            </div>
+
+            <!-- Savings Account -->
+            <div class="bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-2xl p-6 text-white shadow-lg">
+                <div class="flex justify-between items-start mb-8">
+                    <div>
+                        <p class="text-emerald-200 text-sm">Savings Account</p>
+                        <p class="text-xs text-emerald-300 mt-1 tb">FI21 1234 5600 0009 23</p>
+                    </div>
+                    <svg class="w-8 h-8 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                              d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
+                <p class="text-emerald-200 text-xs mb-1">Total Savings</p>
+                <p class="text-3xl font-bold tb">€45,230.00</p>
+            </div>
+
+            <!-- Credit Card -->
+            <div class="bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl p-6 text-white shadow-lg">
+                <div class="flex justify-between items-start mb-8">
+                    <div>
+                        <p class="text-purple-200 text-sm">Visa Platinum</p>
+                        <p class="text-xs text-purple-300 mt-1 tb">**** **** **** 4829</p>
+                    </div>
+                    <svg class="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                              d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                    </svg>
+                </div>
+                <p class="text-purple-200 text-xs mb-1">Credit Used</p>
+                <p class="text-3xl font-bold tb">€2,156.80</p>
+                <p class="text-purple-300 text-xs mt-1 tb">of €10,000.00 limit</p>
+            </div>
+        </div>
+
+        <!-- Two Column: Transactions + Quick Actions -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Recent Transactions -->
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-200">
+                <div class="p-6 border-b border-gray-100">
+                    <h2 class="text-lg font-semibold text-gray-900">Recent Transactions</h2>
+                </div>
+                <div class="divide-y divide-gray-50">
+
+                    <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900 tb">K-Supermarket Helsinki</p>
+                                <p class="text-xs text-gray-500 tb">11 Feb 2026, 08:32</p>
+                            </div>
+                        </div>
+                        <span class="text-sm font-semibold text-red-600 tb">-€47.85</span>
+                    </div>
+
+                    <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900 tb">Salary — Bountyy Oy</p>
+                                <p class="text-xs text-gray-500 tb">01 Feb 2026, 00:01</p>
+                            </div>
+                        </div>
+                        <span class="text-sm font-semibold text-green-600 tb">+€6,450.00</span>
+                    </div>
+
+                    <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900 tb">Wolt — Food Delivery</p>
+                                <p class="text-xs text-gray-500 tb">31 Jan 2026, 19:22</p>
+                            </div>
+                        </div>
+                        <span class="text-sm font-semibold text-red-600 tb">-€23.40</span>
+                    </div>
+
+                    <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900 tb">HSL — Monthly Pass</p>
+                                <p class="text-xs text-gray-500 tb">28 Jan 2026, 10:15</p>
+                            </div>
+                        </div>
+                        <span class="text-sm font-semibold text-red-600 tb">-€62.70</span>
+                    </div>
+
+                    <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900 tb">Netflix</p>
+                                <p class="text-xs text-gray-500 tb">25 Jan 2026, 00:00</p>
+                            </div>
+                        </div>
+                        <span class="text-sm font-semibold text-red-600 tb">-€17.99</span>
+                    </div>
+
+                    <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900 tb">Alko Oy</p>
+                                <p class="text-xs text-gray-500 tb">24 Jan 2026, 17:45</p>
+                            </div>
+                        </div>
+                        <span class="text-sm font-semibold text-red-600 tb">-€34.90</span>
+                    </div>
+
+                </div>
+                <div class="p-4 border-t border-gray-100 text-center">
+                    <a href="#" class="text-blue-600 text-sm font-medium hover:text-blue-700">View All Transactions</a>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="space-y-6">
+
+                <!-- Quick Transfer -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-sm font-semibold text-gray-900 mb-4">Quick Transfer</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                <span class="text-orange-600 text-xs font-bold tb">AK</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900 tb">Antti Korhonen</p>
+                                <p class="text-xs text-gray-400 tb">FI89 8765 4321 0012 34</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
+                                <span class="text-pink-600 text-xs font-bold tb">SV</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900 tb">Sanna Virtanen</p>
+                                <p class="text-xs text-gray-400 tb">FI55 9876 5432 1098 76</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Details -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-sm font-semibold text-gray-900 mb-4">Account Details</h3>
+                    <dl class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <dt class="text-gray-500">Account Holder</dt>
+                            <dd class="text-gray-900 font-medium tb">Mihalis Haatainen</dd>
+                        </div>
+                        <div class="flex justify-between">
+                            <dt class="text-gray-500">IBAN</dt>
+                            <dd class="text-gray-900 font-medium tb">FI21 1234 5600 0007 85</dd>
+                        </div>
+                        <div class="flex justify-between">
+                            <dt class="text-gray-500">BIC</dt>
+                            <dd class="text-gray-900 font-medium tb">NDEAFIHH</dd>
+                        </div>
+                        <div class="flex justify-between">
+                            <dt class="text-gray-500">Account Type</dt>
+                            <dd class="text-gray-900 font-medium tb">Personal Current</dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <!-- Security Status -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-sm font-semibold text-gray-900 mb-4">Security</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">2FA Enabled</span>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 tb">Active</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Last Password Change</span>
+                            <span class="text-sm text-gray-900 tb">14 days ago</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Session</span>
+                            <span class="text-xs text-gray-400 font-mono tb">{{ session_id_short }}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 border-t border-gray-200 bg-white">
+        <div class="max-w-7xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
+            <p>SecureBank is a fictional entity. This page is a TypeBleed security research PoC by <a href="https://bountyy.fi" class="text-blue-500 hover:underline">Bountyy Oy</a>.</p>
+            <p class="mt-1">No actual banking data is displayed. No real data is exfiltrated.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
